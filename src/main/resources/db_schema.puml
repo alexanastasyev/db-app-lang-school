@@ -1,0 +1,75 @@
+@startuml
+    hide circle
+    hide methods
+
+    class Language as "Язык" {
+        * id [ПК]
+        * наименование
+    }
+
+    class Teacher as "Преподаватель" {
+        * id [ПК]
+        * фамилия
+        * имя
+        * отчество
+'        * языки [ВК]
+    }
+
+    class Course as "Курс" {
+        * id [ПК]
+        * название
+        * язык [ВК]
+        * преподаватель [ВК]
+    }
+
+    class Student as "Ученик" {
+        * id [ПК]
+        * фамилия
+        * имя
+        * отчество
+'        * курсы [ВК]
+    }
+
+    class Lesson as "Занятие" {
+        * id [ПК]
+        * курс [ВК]
+        * дата
+    }
+
+    class Presence as "Присутствие" {
+        * id [ПК]
+        * ученик [ВК]
+        * занятие [ВК]
+        * присутствие
+    }
+
+    class Test as "Тестирование" {
+        * id [ПК]
+        * курс [ВК]
+        * ученик [ВК]
+        * тема
+        * оценка
+    }
+
+    class Feedback as "Отзыв" {
+        * id [ПК]
+        * ученик [ВК]
+        * курс [ВК]
+        * текст
+    }
+
+    Language "1" <-- "N" Course
+
+    Course "N" <--> "N" Student
+    Course "N" --> "1" Teacher
+    Course "1" <-- "N" Lesson
+    Course "1" <-- "N" Test
+    Course "1" <-- "N" Feedback
+
+    Student "1" <-- "N" Test
+    Student "1" <-- "N" Feedback
+    Student "1" <-- "N" Presence
+
+    Lesson "1" <-- "N" Presence
+
+@enduml
