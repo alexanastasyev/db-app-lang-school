@@ -8,18 +8,11 @@ public class Teacher {
     private final String lastname;
     private final Optional<String> patronymic;
 
-    public Teacher(int id, String firstname, String lastname, String patronymic) {
+    public Teacher(int id, String firstname, String lastname, Optional<String> patronymic) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.patronymic = Optional.of(patronymic);
-    }
-
-    public Teacher(int id, String firstname, String lastname) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.patronymic = Optional.empty();
+        this.patronymic = patronymic;
     }
 
     public int getId() {

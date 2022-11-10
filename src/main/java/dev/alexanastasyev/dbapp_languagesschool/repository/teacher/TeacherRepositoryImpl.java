@@ -30,7 +30,7 @@ public class TeacherRepositoryImpl implements TeacherRepository {
                 resultSet.getInt("id"),
                 resultSet.getString("firstname"),
                 resultSet.getString("lastname"),
-                resultSet.getString("patronymic")
+                Optional.ofNullable(resultSet.getString("patronymic"))
         );
     }
 
