@@ -15,17 +15,17 @@ CREATE TABLE teachers
 CREATE TABLE courses
 (
     id          serial primary key,
-    name        varchar(50)   not null,
-    description varchar(1000) not null,
-    language_id integer references languages (id),
-    teacher_id  integer references teachers (id)
+    name        varchar(50)                       not null,
+    description varchar(1000)                     not null,
+    language_id integer references languages (id) not null,
+    teacher_id  integer references teachers (id)  not null
 );
 
 CREATE TABLE lessons
 (
     id        serial primary key,
-    course_id integer references courses (id),
-    datetime  timestamp not null
+    course_id integer references courses (id) not null,
+    datetime  timestamp                       not null
 );
 
 CREATE TABLE students
@@ -39,32 +39,32 @@ CREATE TABLE students
 CREATE TABLE students_courses
 (
     id         serial primary key,
-    student_id integer references students (id),
-    course_id  integer references courses (id)
+    student_id integer references students (id) not null,
+    course_id  integer references courses (id)  not null
 );
 
 CREATE TABLE presences
 (
     id         serial primary key,
-    student_id integer references students (id),
-    lesson_id  integer references lessons (id),
-    presence   boolean not null
+    student_id integer references students (id) not null,
+    lesson_id  integer references lessons (id)  not null,
+    presence   boolean                          not null
 );
 
 CREATE TABLE tests
 (
     id         serial primary key,
-    student_id integer references students (id),
-    course_id  integer references courses (id),
-    topic      varchar(50) not null,
-    score      integer     not null
+    student_id integer references students (id) not null,
+    course_id  integer references courses (id)  not null,
+    topic      varchar(50)                      not null,
+    score      integer                          not null
 );
 
 CREATE TABLE feedbacks
 (
     id         serial primary key,
-    student_id integer references students (id),
-    course_id  integer references courses (id),
-    score      integer not null,
+    student_id integer references students (id) not null,
+    course_id  integer references courses (id)  not null,
+    score      integer                          not null,
     text       varchar(500)
 );
