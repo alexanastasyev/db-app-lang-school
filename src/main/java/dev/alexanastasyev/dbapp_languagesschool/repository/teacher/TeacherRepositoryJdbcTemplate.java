@@ -10,12 +10,12 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 @Repository
-public class TeacherRepositoryImpl implements TeacherRepository {
+public class TeacherRepositoryJdbcTemplate implements TeacherRepository {
 
     private final JdbcTemplate jdbc;
 
     @Autowired
-    public TeacherRepositoryImpl(JdbcTemplate jdbc) {
+    public TeacherRepositoryJdbcTemplate(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 

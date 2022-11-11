@@ -14,14 +14,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public class CoursesRepositoryImpl implements CoursesRepository {
+public class CoursesRepositoryJdbcTemplate implements CoursesRepository {
 
     private final LanguagesRepository languagesRepository;
     private final TeacherRepository teacherRepository;
     private final JdbcTemplate jdbc;
 
     @Autowired
-    public CoursesRepositoryImpl(LanguagesRepository languagesRepository, TeacherRepository teacherRepository, JdbcTemplate jdbc) {
+    public CoursesRepositoryJdbcTemplate(LanguagesRepository languagesRepository, TeacherRepository teacherRepository, JdbcTemplate jdbc) {
         this.languagesRepository = languagesRepository;
         this.teacherRepository = teacherRepository;
         this.jdbc = jdbc;
