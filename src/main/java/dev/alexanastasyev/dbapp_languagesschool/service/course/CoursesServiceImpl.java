@@ -21,4 +21,11 @@ public class CoursesServiceImpl implements CoursesService {
     public List<Course> getAllCourses() {
         return coursesRepository.findAll();
     }
+
+    @Override
+    public List<Course> getByName(String name) {
+        return coursesRepository.findByName(name);
+    }
+
+
 }

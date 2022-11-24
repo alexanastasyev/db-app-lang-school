@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CoursesRepository {
     List<Course> findAll();
+    List<Course> findByName(String name);
 }

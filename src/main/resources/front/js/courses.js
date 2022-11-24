@@ -1,5 +1,22 @@
 function loadAllCourses() {
-    fetch('http://localhost:8080/courses' , {
+    let url = 'http://localhost:8080/courses';
+    loadCoursesWithUrl(url);
+}
+
+function searchCoursesByName() {
+    let search = document.getElementById("searchCourseName").value;
+    let url = 'http://localhost:8080/courses?search=' + search;
+    console.log(url);
+    loadCoursesWithUrl(url);
+}
+
+function showAllCourses() {
+    document.getElementById("searchCourseName").value = "";
+    loadAllCourses();
+}
+
+function loadCoursesWithUrl(url) {
+    fetch(url, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
@@ -14,7 +31,11 @@ function loadAllCourses() {
 }
 
 function showCourses(courses) {
+    let id = "coursesTable";
+    clearIfExists(id);
+
     const table = document.createElement('table');
+    table.id = id;
     table.className = "table";
 
     const tableHead = document.createElement('thead');
@@ -37,6 +58,13 @@ function showCourses(courses) {
     table.appendChild(tableBody);
     table.style.marginTop = '50px';
     document.getElementById('main-container').appendChild(table);
+}
+
+function clearIfExists(id) {
+    let elem = document.getElementById(id);
+    if (elem != undefined) {
+        elem.remove();
+    }
 }
 
 function appendHeaderToTable(tableHead, headerText) {

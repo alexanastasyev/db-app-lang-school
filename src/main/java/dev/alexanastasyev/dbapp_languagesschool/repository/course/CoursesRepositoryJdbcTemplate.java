@@ -32,6 +32,13 @@ public class CoursesRepositoryJdbcTemplate implements CoursesRepository {
         return jdbc.query("SELECT id, name, description, language_id, teacher_id FROM courses", this::mapRowToCourse);
     }
 
+    @Override
+    public List<Course> findByName(String name) {
+        String query = "SELECT id, name, description, language_id, teacher_id FROM courses WHERE name LIKE ?";
+        String namePattern = "%" + name + "%";
+        return jdbc.query(query, this::mapRowToCourse, namePattern);
+    }
+
     private Course mapRowToCourse(ResultSet resultSet, int rowNumber) throws SQLException {
         Language language = languagesRepository.findById(resultSet.getInt("language_id"))
                 .orElseThrow(() -> new SQLException("Language not found"));

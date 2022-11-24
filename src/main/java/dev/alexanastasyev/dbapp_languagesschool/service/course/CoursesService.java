@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CoursesService {
     List<Course> getAllCourses();
+    List<Course> getByName(String name);
 }
