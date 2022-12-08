@@ -29,7 +29,8 @@ public class CoursesRepositoryJdbcTemplate implements CoursesRepository {
 
     @Override
     public List<Course> findAll() {
-        return jdbc.query("SELECT id, name, description, language_id, teacher_id FROM courses", this::mapRowToCourse);
+        String query = "SELECT id, name, description, language_id, teacher_id FROM courses";
+        return jdbc.query(query, this::mapRowToCourse);
     }
 
     @Override
