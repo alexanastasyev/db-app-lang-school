@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -23,6 +24,17 @@ public class TeacherRepositoryJdbcTemplate implements TeacherRepository {
     public Optional<Teacher> findById(int id) {
         Teacher teacher = jdbc.queryForObject("SELECT id, firstname, lastname, patronymic FROM teachers WHERE id = ?", this::mapRowToTeacher, id);
         return Optional.ofNullable(teacher);
+    }
+
+    @Override
+    public List<Teacher> findAll() {
+        String query = "SELECT id, firstname, lastname, patronymic FROM teachers";
+        return jdbc.query(query, this::mapRowToTeacher);
+    }
+
+    @Override
+    public void add(Teacher teacher) {
+        jdbc.update("CALL insert_teacher(?, ?, ?)", teacher.getFirstname(), teacher.getLastname(), teacher.getPatronymic().orElse(""));
     }
 
     private Teacher mapRowToTeacher(ResultSet resultSet, int rowNumber) throws SQLException {
